@@ -1,11 +1,9 @@
 var board = [];
 var rows;
 var columns;
-
 var minesCount;
 
-function Settings(){
-
+function Settings() {
     var radiosDiff = document.getElementsByName('Difficulty');
     var radiosMap = document.getElementsByName('Map');
     var isCheckedDiff = false;
@@ -25,49 +23,43 @@ function Settings(){
         }
     }
 
-
     if (!isCheckedDiff || !isCheckedMap) {
         alert('Please select an option before submitting.');
         return;
     } else {
-        if (document.getElementById("Easy").checked){
-            minesCount = parseInt(document.getElementById("Easy").value, 10);
+        if (document.getElementById("EasyRadio").checked){
+            minesCount = parseInt(document.getElementById("EasyRadio").value, 10);
         }
-        if (document.getElementById("Medium").checked){
-            minesCount = parseInt(document.getElementById("Medium").value, 10);
+        if (document.getElementById("MediumRadio").checked){
+            minesCount = parseInt(document.getElementById("MediumRadio").value, 10);
         }
-        if (document.getElementById("Hard").checked){
-            minesCount = parseInt(document.getElementById("Hard").value, 10); 
+        if (document.getElementById("HardRadio").checked){
+            minesCount = parseInt(document.getElementById("HardRadio").value, 10); 
         }
     
-    
-        if (document.getElementById("Small").checked){
-            rows = parseInt(document.getElementById("Small").value, 10);
+        if (document.getElementById("SmallRadio").checked){
+            rows = parseInt(document.getElementById("SmallRadio").value, 10);
             columns = rows;
             minesCount -= 10;
             document.getElementById("board").style.width = "350px";
             document.getElementById("board").style.height = "350px";
-    
             document.getElementById("Game").style.bottom = "30%";
             document.getElementById("Game").style.left = "40%";
         }
-        if (document.getElementById("Med").checked){
-            rows = parseInt(document.getElementById("Med").value, 10);
+        if (document.getElementById("MedRadio").checked){
+            rows = parseInt(document.getElementById("MedRadio").value, 10);
             columns = rows;
             document.getElementById("board").style.width = "600px";
             document.getElementById("board").style.height = "600px";
-    
             document.getElementById("Game").style.bottom = "10%";
             document.getElementById("Game").style.left = "32%";
-            
         }
-        if (document.getElementById("Large").checked){
-            rows = parseInt(document.getElementById("Large").value, 10); 
+        if (document.getElementById("LargeRadio").checked){
+            rows = parseInt(document.getElementById("LargeRadio").value, 10); 
             columns = rows;
             minesCount += 10;
             document.getElementById("board").style.width = "750px";
             document.getElementById("board").style.height = "750px";
-    
             document.getElementById("Game").style.bottom = "5%";
             document.getElementById("Game").style.left = "30%";
         }
@@ -77,19 +69,12 @@ function Settings(){
         startGame();
         document.getElementById("Restart-Button").addEventListener("click", restartGame);
     }
-    
-    
 }
 
-
-var minesLocation = []; // "2-2", "3-4", "2-1"
-
-var tilesClicked = 0; // goal to click all tiles except the ones containing mines
+var minesLocation = [];
+var tilesClicked = 0;
 var flagEnabled = false;
 var gameOver = false;
-
-
-
 
 function setMines() {
     let minesLeft = minesCount;
@@ -104,12 +89,11 @@ function setMines() {
         }
     }
 }
+
 function startGame() {
     document.getElementById("mines-count").innerText = minesCount;
-
     setMines();
 
-    // Populate our board
     for (let r = 0; r < rows; r++) {
         let row = [];
         for (let c = 0; c < columns; c++) {
@@ -155,7 +139,6 @@ function clickTile(e) {
         gameOver = true;
     }
 }
-
 
 function placeFlag() {
     if (this.classList.contains("tile-clicked")) {
@@ -237,7 +220,6 @@ function restartGame() {
     tilesClicked = 0;
     gameOver = false;
     flagEnabled = false;
-
 
     document.getElementById("BombExplotion").style.visibility  = "hidden";
     document.getElementById("mines-count").innerText = minesCount;
